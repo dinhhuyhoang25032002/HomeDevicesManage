@@ -1,0 +1,83 @@
+.topnav {
+    overflow: hidden;
+
+    background: #fffffb;
+
+    height: 100vh;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+
+    z-index: 11;
+    // justify-content: space-between;
+    //  position: fixed;
+
+    .contact-information {
+        margin-left: 15px;
+        margin-top: 35px;
+        padding: 0 5px 0 0px;
+    }
+
+    .container {
+        padding-top: 9px;
+        padding-left: 15px;
+        margin-bottom: 10px;
+
+        .sub-item {
+            display: flex;
+            cursor: pointer;
+            width: fit-content;
+            justify-content: center;
+            align-items: center;
+            margin-left: 8px;
+            padding-bottom: 5px;
+            font-size: 20px;
+            position: relative;
+
+            i {
+                font-size: 20px;
+                margin-right: 10px;
+            }
+
+            a {
+                text-decoration: none;
+
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                transform: scaleX(0);
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: #f9d800;
+                transform-origin: bottom right;
+                transition: transform 0.25s linear;
+
+
+            }
+
+            &:hover {
+                a {
+                    color: #f9d800;
+                }
+
+                color: #f9d800;
+
+                &:after {
+                    transform: scaleX(1);
+                    transform-origin: bottom left;
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+
+
+
+
+
+}

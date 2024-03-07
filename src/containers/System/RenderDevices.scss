@@ -1,0 +1,62 @@
+.infor-devices-container {
+    width: 100%;
+    height: fit-content;
+
+    .show-devices {
+        display: flex;
+        width: 100%;
+        height: fit-content;
+        background: #eff2b4;
+        padding: 30px 120px;
+        gap: 150px;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .body-render-devices {
+            display: flex;
+            width: 357px;
+            height: 250px;
+            background: white;
+            flex-wrap: wrap;
+            border-radius: 7px;
+
+            .name-devices {
+                width: 100%;
+                text-align: center;
+                text-transform: uppercase;
+                padding: 5px;
+                height: fit-content;
+                background: rgb(100, 176, 42);
+                color: white;
+                border-top-right-radius: 7px;
+                border-top-left-radius: 7px;
+            }
+
+            .render-image {
+                width: 280px;
+                height: 150px;
+
+                margin-left: -91px;
+                background: url(../../assets/images/devices/livingroom.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+            .render-text {
+                width: 123px;
+                height: 150px;
+                border: 1px solid red;
+                margin-left: 20px;
+                display: flex;
+                flex-direction: column;
+
+                .speed {}
+
+                .energy {}
+
+                .temt {}
+            }
+        }
+    }
+}

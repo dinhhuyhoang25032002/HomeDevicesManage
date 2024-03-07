@@ -1,0 +1,170 @@
+.home-page-container {
+    width: fit-content;
+    height: fit-content;
+
+
+    .body-system {
+        overflow: hidden;
+        height: fit-content;
+
+        display: flex;
+        flex-direction: column;
+
+        .content-system {
+            display: flex;
+            height: 100%;
+
+
+
+            @keyframes example {
+                from {
+                    background: url(../../assets/images/Kitchen.png);
+
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+
+
+                }
+
+                to {
+                    background: url(../../assets/images/livingroom.png);
+
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+
+
+                }
+
+                to {
+                    background: url(../../assets/images/hoverview.png);
+
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+
+                }
+            }
+
+            /* Apply the animation to the element */
+            .image {
+                width: 100vw;
+                height: 100vh !important;
+                animation-name: example;
+                animation-fill-mode: forwards;
+                animation-duration: 14s;
+                animation-iteration-count: infinite;
+                animation-direction: alternate;
+            }
+
+
+
+        }
+
+        .text-center {}
+
+       
+        .contact {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            padding-bottom: 15px;
+            padding-right: 15px;
+            width: fit-content;
+            height: fit-content;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: end;
+            gap: 15px;
+            background: rgba(246, 240, 240, 0.361);
+
+            .logo-messenger {
+                background: url(../../assets/images/messenger.png);
+                width: 47px;
+                height: 47px;
+                border-radius: 50%;
+                border: 2px solid rgb(246, 240, 240);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                cursor: pointer;
+            }
+
+            .logo-zalo {
+                background: url(../../assets/images/logo-zalo-02.jpg);
+                width: 45px;
+                height: 45px;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                border-radius: 50%;
+                border: 1px solid #149cdb;
+                cursor: pointer;
+            }
+
+        }
+
+        .footer-system {}
+    }
+}
+
+// .slick-slider {
+
+//     .slick-prev {
+//         text-align: center;
+//         border: 2px solid #d7d7d7 !important;
+//         z-index: 3 !important;
+//         left: -12px !important;
+//         width: 44px !important;
+//         height: 48px !important;
+//         background: #fcf7f7 !important;
+//         border-radius: 27%;
+
+//         &:hover {
+//             background: #fff !important;
+//             font-weight: 900 !important;
+//         }
+//     }
+
+//     .slick-next {
+
+//         border: 2px solid #d7d7d7 !important;
+//         right: -12px !important;
+//         bottom: 100px !important;
+//         width: 44px !important;
+//         height: 48px !important;
+//         background: #fcf7f7 !important;
+//         border-radius: 27%;
+
+//         &:hover {
+//             background: #fff !important;
+//             font-weight: 900 !important;
+//         }
+
+//     }
+
+//     .slick-next:before {
+//         content: '\276F';
+//         color: #959595 !important;
+//         font-weight: 400 !important;
+//         font-size: 22px;
+//     }
+
+
+//     .slick-prev:before {
+//         content: '\276E';
+//         color: #959595 !important;
+//         font-weight: 400 !important;
+//         font-size: 22px;
+//     }
+
+//     .slick-disabled {
+//         display: none !important;
+//     }
+// }
