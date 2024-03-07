@@ -14,7 +14,7 @@
             // align-items: center;
 
             .header-logo {
-                background: url(../assets/images/logo.png) ;
+                background: url(../assets/images/logo.png);
 
                 width: 20%;
                 height: 20%;
@@ -58,7 +58,7 @@
                     margin: 30px 0px;
 
                     &:hover {
-                       
+
                         background: rgb(36, 220, 201);
                     }
                 }
@@ -148,21 +148,37 @@
                     .group-signup-input {
                         width: 100%;
 
+                        .group-message {
+                            display: flex;
+                            justify-content: space-between;
+                            .forgot-passname{
+                                color: darkgrey;
+                                cursor: pointer;
+                                &:hover{
+                                    color: rgb(26, 139, 101);
+                                }
+                            }
+                        }
+
                         .form-floating {
+
                             //position: relative;
-                            .form-control{
-                                padding-left: 29px ;
+                            .form-control {
+                                padding-left: 29px;
                             }
+
                             .label-input {
-                                padding-left: 30px ;
+                                padding-left: 30px;
                             }
-                            .icon-isshow{
+
+                            .icon-isshow {
                                 position: absolute;
                                 right: 33px;
                                 top: 1px;
                                 cursor: pointer;
                                 padding-right: 10px;
                             }
+
                             .fa-envelope {
                                 position: absolute;
                                 left: 11px;

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from "../../store/actions";
-import Navigator from '../../components/Navigator';
-import { adminMenu } from './menuApp';
+// import Navigator from '../../components/Navigator';
+// import { adminMenu } from './menuApp';
 import './Header.scss';
 import Navigate from './Navigate';
 import HomeDevicesManage from '../System/HomeDevicesManage'
@@ -16,6 +16,7 @@ class Header extends Component {
         this.state = {
             isShow: false,
             isshowModal: false,
+            isShowModalChangePassword: false,
         }
     }
 
@@ -34,7 +35,7 @@ class Header extends Component {
         })
     }
 
-    closeModalDoctorSchedule = () => {
+    closeModal = () => {
         this.setState({
             isshowModal: false
         })
@@ -42,7 +43,15 @@ class Header extends Component {
 
     handleIsShowModal = () => {
         this.setState({
-            isshowModal: true
+            isshowModal: true,
+            isShowModalChangePassword: false,
+        })
+    }
+    handleisShowModalChangePassword = () => {
+        this.setState({
+            isshowModal: true,
+            isShowModalChangePassword: true,
+
         })
     }
     render() {
@@ -110,6 +119,7 @@ class Header extends Component {
                             <div className='top-nav'>
                                 <Navigate
                                     isshowModal={this.handleIsShowModal}
+                                    isShowModalChangePassword={this.handleisShowModalChangePassword}
                                 />
 
                                 <div className='over-dark'
@@ -125,18 +135,19 @@ class Header extends Component {
                         <>
                         </>
                     }
-                      {
-                              isshowModal === true ?
+                    {
+                        isshowModal === true ?
 
-                                    <HomeDevicesManage
-                                        isshowModal={isshowModal}
-                                        closeModalDoctorSchedule={this.closeModalDoctorSchedule}
-                                    />
-                                    :
-                                    <div>
-                                    </div>
+                            <HomeDevicesManage
+                                isshowModal={isshowModal}
+                                handleCloseModal={this.closeModal}
+                                isShowModalChangePassword={this.state.isShowModalChangePassword}
+                            />
+                            :
+                            <div>
+                            </div>
 
-                            }
+                    }
 
                 </div>
 

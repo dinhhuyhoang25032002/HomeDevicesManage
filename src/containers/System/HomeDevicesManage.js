@@ -21,7 +21,9 @@ class HomeDevicesManage extends Component {
             name: '',
             descriptionHTML: '',
             descriptionMarkdown: '',
-            isOpen: false
+            isOpen: false, username: '',
+            password: '',
+            errMessage: ''
         }
     }
 
@@ -76,14 +78,14 @@ class HomeDevicesManage extends Component {
 
     }
     render() {
-        let { isshowModal, closeModalDoctorSchedule } = this.props;
+        let { isshowModal, handleCloseModal, isShowModalChangePassword } = this.props;
 
-
+        console.log("hoang check data: ", isshowModal, "   vs   ", isShowModalChangePassword);
         return (
             <>
                 <Modal
                     isOpen={isshowModal}
-                    toggle={closeModalDoctorSchedule}
+                    toggle={handleCloseModal}
                     className='bookingcare-modal-container'
                     centered
                     size='lg'
@@ -93,65 +95,127 @@ class HomeDevicesManage extends Component {
                             <div className='logo-system'>
 
                             </div>
-                            <div className='content-modal row'>
+                            {
+                                isshowModal === true ?
+                                    <> {
+                                        isShowModalChangePassword === true ?
+                                            <div className='content-modal row'>
 
-                                <div className="text-center title-modal" >Home Devices Manage</div>
-                                <div className='infor-devices row'>
-                                    <div className='left-infor'>
-                                        <div class=" mb-3  input-group ">
-                                            <span className="input-group-text" id="basic-addon1">
-                                                <i class="fa fa-address-book" aria-hidden="true"></i>
-                                            </span>
-                                            <input type="text" className="form-control" placeholder="Tên phòng" aria-describedby="basic-addon1"
-                                                value={this.state.name}
-                                                onChange={(event) => this.handleOnChange(event)}
-                                            />
-                                        </div>
-                                        <div class=" mb-3  input-group ">
-                                            <span className="input-group-text" id="basic-addon2">
-                                                <i class="fa fa-cogs" aria-hidden="true"></i>
-                                            </span>
-                                            <input type="text" className="form-control col-4" placeholder="Tên thiết bị" aria-describedby="basic-addon1" />
-                                        </div>
-                                        <div class=" mb-3  input-group ">
-                                            <span className="input-group-text" id="basic-addon3">
-                                                <i class="fa fa-tags" aria-hidden="true"></i>
-                                            </span>
-                                            <input type="text" className="form-control col-4" placeholder="Miêu tả" aria-describedby="basic-addon1" />
-                                        </div>
-                                    </div>
-                                    <div className='right-infor'>
-                                        <div className='update-avatar'>
-                                            <input id='update-image1' className="form-control" type="file" hidden
-                                                onChange={(event) => { this.handleUpdateImage(event) }}
-                                            />
+                                                <div className="text-center title-modal" >Change your password</div>
+                                                <div className='group-signup-input'>
+                                                    <div class="form-floating mb-3">
+                                                        <input type="email" className="form-control" id="floatingInput"
+                                                            placeholder="name@example.com" value={this.state.username}
 
-                                            <label className='label-update' htmlFor="update-image1"> Tải ảnh<i class="fa fa-file-image" aria-hidden="true"></i></label>
-                                            <div className='preview-image'
-                                                style={{ backgroundImage: `url(${this.state.updateImage})` }}
-                                                onClick={() => { this.handlePreviewImage() }}
-                                            >
+                                                            onChange={(event) => this.handleOnChangeUser(event)}
+                                                            onKeyDown={(event) => { this.handleKeyDown(event) }}
+                                                        />
+                                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+
+                                                        <label className='label-input' for="floatingInput">Địa chỉ email</label>
+                                                    </div>
+                                                    <div class="form-floating  mb-3">
+                                                        <input type={this.state.isShowPassword ? 'text' : 'password'} className="form-control"
+                                                            id="floatingPassword" placeholder="Password" value={this.state.password}
+                                                            onChange={(event) => this.handleOnChangePassword(event)}
+                                                            onKeyDown={(event) => { this.handleKeyDown(event) }}
+                                                        />
+                                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                                        <span className='icon-isshow' onClick={() => { this.handleShowHidePassword() }}>
+
+                                                            <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
+                                                        </span>
+                                                        <label className='label-input' for="floatingPassword">Mật khẩu mới</label>
+                                                    </div>
+
+                                                    <div class="form-floating">
+                                                        <input type="text" className="form-control" id="floatingInput1"
+                                                            placeholder="FullName" value={this.state.fullname}
+                                                            onChange={(event) => this.handleOnChangeFullName(event)}
+                                                            onKeyDown={(event) => { this.handleKeyDown(event) }}
+                                                        />
+                                                        <i class="fa fa-user" aria-hidden="false"></i>
+                                                        <label className='label-input' for="floatingInput1">Nhập lại mật khẩu</label>
+                                                    </div>
+
+                                                    <div className='errLogin' style={{ color: 'red' }}>
+                                                        {this.state.errMessage}
+                                                    </div>
+                                                    <div className='footer-change-password'>
+                                                        <button className='btn-change-password'>
+                                                            Đổi mật khẩu
+                                                        </button>
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div>
+                                            :
+                                            <div className='content-modal row'>
 
-                                        </div>
+                                                <div className="text-center title-modal" >Home Devices Manage</div>
+                                                <div className='infor-devices row'>
+                                                    <div className='left-infor'>
+                                                        <div class=" mb-3  input-group ">
+                                                            <span className="input-group-text" id="basic-addon1">
+                                                                <i class="fa fa-address-book" aria-hidden="true"></i>
+                                                            </span>
+                                                            <input type="text" className="form-control" placeholder="Tên phòng" aria-describedby="basic-addon1"
+                                                                value={this.state.name}
+                                                                onChange={(event) => this.handleOnChange(event)}
+                                                            />
+                                                        </div>
+                                                        <div class=" mb-3  input-group ">
+                                                            <span className="input-group-text" id="basic-addon2">
+                                                                <i class="fa fa-cogs" aria-hidden="true"></i>
+                                                            </span>
+                                                            <input type="text" className="form-control col-4" placeholder="Tên thiết bị" aria-describedby="basic-addon1" />
+                                                        </div>
+                                                        <div class=" mb-3  input-group ">
+                                                            <span className="input-group-text" id="basic-addon3">
+                                                                <i class="fa fa-tags" aria-hidden="true"></i>
+                                                            </span>
+                                                            <input type="text" className="form-control col-4" placeholder="Miêu tả" aria-describedby="basic-addon1" />
+                                                        </div>
+                                                    </div>
+                                                    <div className='right-infor'>
+                                                        <div className='update-avatar'>
+                                                            <input id='update-image1' className="form-control" type="file" hidden
+                                                                onChange={(event) => { this.handleUpdateImage(event) }}
+                                                            />
 
-                                    </div>
+                                                            <label className='label-update' htmlFor="update-image1"> Tải ảnh<i class="fa fa-file-image" aria-hidden="true"></i></label>
+                                                            <div className='preview-image'
+                                                                style={{ backgroundImage: `url(${this.state.updateImage})` }}
+                                                                onClick={() => { this.handlePreviewImage() }}
+                                                            >
+                                                            </div>
+                                                        </div>
+                                                        <div>
+
+                                                        </div>
+
+                                                    </div>
 
 
-                                </div>
-                                <div className='footer-modal'>
-                                    <button className='btn btn-primary'
-                                        onClick={() => this.handleCreateDevice()}
-                                    >
-                                        Thêm mới
-                                    </button>
-                                    <button className='btn btn-success'>
-                                        Chỉnh sửa
-                                    </button>
-                                </div>
-                            </div>
+                                                </div>
+                                                <div className='footer-modal'>
+                                                    <button className='btn btn-primary'
+                                                        onClick={() => this.handleCreateDevice()}
+                                                    >
+                                                        Thêm mới
+                                                    </button>
+                                                    <button className='btn btn-success'>
+                                                        Chỉnh sửa
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    }</>
+                                    :
+                                    <>
+                                    </>
+                            }
+
+
                         </div>
 
                     </div>

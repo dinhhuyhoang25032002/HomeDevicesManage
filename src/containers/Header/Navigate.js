@@ -7,7 +7,7 @@ class Navigate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            isShowNavigator: false
         }
     }
     componentDidMount() {
@@ -16,9 +16,13 @@ class Navigate extends Component {
     componentDidUpdate() {
 
     }
-
+    handleChoiceOption = () => {
+        this.setState({
+            isShowNavigator: !this.state.isShowNavigator
+        })
+    }
     render() {
-        let { isshowModal } = this.props;
+        let { isshowModal, isShowModalChangePassword } = this.props;
         console.log('hoang check data', isshowModal);
         return (
             <div className="topnav" >
@@ -26,11 +30,11 @@ class Navigate extends Component {
                     <div className='sub-item'>
                         <i className="fas fa-plus-circle"
                         ></i>
-                        <NavLink to="/about-homecare"> Giới Thiệu</NavLink>
+                        <NavLink to="/about-homecare">Giới Thiệu</NavLink>
                     </div>
                     <div className='sub-item'>
                         <i className="fas fa-phone"></i>
-                        <NavLink to="/contact-to-admin"> Liên Hệ</NavLink>
+                        <NavLink to="/contact-to-admin">Liên Hệ</NavLink>
                     </div>
                     <div className='sub-item'>
                         <i className="far fa-newspaper"></i>
@@ -41,11 +45,32 @@ class Navigate extends Component {
                         <a target='_blank' rel="noreferrer" href="https://www.facebook.com/profile.php?id=61555318416572&open_field=website&sk=about_contact_and_basic_info" exact>Trang Thông Tin</a>
                     </div> */}
                     <div className='sub-item'
-                        onClick={isshowModal}
+                        onClick={() => this.handleChoiceOption()}
                     >
-                        <i className="fas fa-user-cog"></i>
+
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
                         <div>Cài đặt</div>
                     </div>
+
+                    {
+                        this.state.isShowNavigator === true ?
+                            <div className='setting'>
+                                <div className='setting-device'
+                                    onClick={isShowModalChangePassword}
+                                >
+                                    <i className="fas fa-user-cog"></i>
+                                    <span>My Account</span>
+                                </div>
+                                <div className='setting-device'
+                                    onClick={isshowModal}
+                                >
+                                    <div className='image-setting-device'>
+
+                                    </div>
+                                    <span> My Home  </span>
+                                </div>
+                            </div> : <></>
+                    }
                 </div>
 
 

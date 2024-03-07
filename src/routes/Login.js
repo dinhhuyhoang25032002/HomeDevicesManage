@@ -19,6 +19,7 @@ class Login extends Component {
             fullname: '',
             isShowPassword: false,
             errMessage: '',
+            isShowForgotPassword: false,
         }
     }
     async componentDidMount() {
@@ -47,6 +48,13 @@ class Login extends Component {
     handleShowHidePassword = () => {
         this.setState({
             isShowPassword: !this.state.isShowPassword
+        })
+    }
+
+    handleForgotPassword = () => {
+        this.setState({
+            isShowForgotPassword: true,
+            signin: false
         })
     }
 
@@ -95,6 +103,8 @@ class Login extends Component {
     handleChangeStatus = () => {
         this.setState({
             signin: !this.state.signin,
+            isShowForgotPassword: false,
+            errMessage: ''
 
         })
     }
@@ -120,6 +130,9 @@ class Login extends Component {
             toast.error(response.errMessage);
         }
 
+    }
+    handleSendForgotPassword = () => {
+        alert("hoang dep trai !");
     }
     render() {
         let { signin } = this.state;
@@ -155,83 +168,124 @@ class Login extends Component {
                     <div className='right-container'>
                         <div className='container'>
                             <div className=' body-right'>
-                                <div className='title-right'>
-                                    {signin === false ? "create acount" : "Login to your account"}
-                                </div>
-                                <div className='icon-signup'>
-                                    <div className='group-signup-icon'>
 
-                                        <div className='facebook-logo'>
-
+                                {this.state.isShowForgotPassword === true ?
+                                    <>
+                                        <div className='title-right mb-3 '>
+                                            Forgot Password
                                         </div>
-                                        <div className='instagram-logo'>
-
-                                        </div>
-
-                                    </div>
-                                    <span className='type-signup'>or use your email for registration</span>
-
-
-
-                                </div>
-                                <div className='group-signup-input'>
-                                    <div class="form-floating mb-3">
-                                        <input type="email" className="form-control" id="floatingInput"
-                                            placeholder="name@example.com" value={this.state.username}
-
-                                            onChange={(event) => this.handleOnChangeUser(event)}
-                                            onKeyDown={(event) => { this.handleKeyDown(event) }}
-                                        />
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
-
-                                        <label className='label-input' for="floatingInput">Email address</label>
-                                    </div>
-                                    <div class="form-floating  mb-3">
-                                        <input type={this.state.isShowPassword ? 'text' : 'password'} className="form-control"
-                                            id="floatingPassword" placeholder="Password" value={this.state.password}
-                                            onChange={(event) => this.handleOnChangePassword(event)}
-                                            onKeyDown={(event) => { this.handleKeyDown(event) }}
-                                        />
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                        <span className='icon-isshow' onClick={() => { this.handleShowHidePassword() }}>
-
-                                            <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
+                                        <span className='mt-3'>
+                                            Please enter your email address or mobile number to search for your account
                                         </span>
-                                        <label className='label-input' for="floatingPassword">Password</label>
-                                    </div>
+                                        <div className='group-signup-input'>
+                                            <div class="form-floating mb-3 mt-3">
+                                                <input type="email" className="form-control" id="floatingInput"
+                                                    placeholder="name@example.com" value={this.state.username}
 
+                                                    onChange={(event) => this.handleOnChangeUser(event)}
+                                                    onKeyDown={(event) => { this.handleKeyDown(event) }}
+                                                />
+                                                <i class="fa fa-envelope" aria-hidden="true"></i>
 
-
-                                    {signin === false ?
-                                        <div class="form-floating">
-                                            <input type="text" className="form-control" id="floatingInput1"
-                                                placeholder="FullName" value={this.state.fullname}
-                                                onChange={(event) => this.handleOnChangeFullName(event)}
-                                                onKeyDown={(event) => { this.handleKeyDown(event) }}
-                                            />
-                                            <i class="fa fa-user" aria-hidden="false"></i>
-                                            <label className='label-input' for="floatingInput1">FullName</label>
+                                                <label className='label-input' for="floatingInput">Email address</label>
+                                            </div>
                                         </div>
-                                        :
-                                        <div>
-                                        </div>}
-                                    <div className='errLogin' style={{ color: 'red' }}>
-                                        {this.state.errMessage}
-                                    </div>
+                                        <button className='btn-signup'
+                                            onClick={() => this.handleSendForgotPassword()}
+                                        >
+                                            Send request
+                                        </button>
+                                    </>
 
-                                </div>
-                                {signin === false ?
-                                    <button className='btn-signup'
-                                        onClick={() => this.handleSignup()}
-                                    >
-                                        sign up
-                                    </button> :
-                                    <button className='btn-signup'
-                                        onClick={() => this.handleSignin()}
-                                    >
-                                        sign in
-                                    </button>
+
+                                    : <>
+                                        <div className='title-right'>
+                                            {signin === false ? "create acount" : "Login to your account"}
+                                        </div>
+                                        <div className='icon-signup'>
+                                            <div className='group-signup-icon'>
+
+                                                <div className='facebook-logo'>
+
+                                                </div>
+                                                <div className='instagram-logo'>
+
+                                                </div>
+
+                                            </div>
+                                            <span className='type-signup'>or use your email for registration</span>
+
+                                        </div>
+                                        <div className='group-signup-input'>
+                                            <div class="form-floating mb-3">
+                                                <input type="email" className="form-control" id="floatingInput"
+                                                    placeholder="name@example.com" value={this.state.username}
+
+                                                    onChange={(event) => this.handleOnChangeUser(event)}
+                                                    onKeyDown={(event) => { this.handleKeyDown(event) }}
+                                                />
+                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+
+                                                <label className='label-input' for="floatingInput">Email address</label>
+                                            </div>
+                                            <div class="form-floating  mb-3">
+                                                <input type={this.state.isShowPassword ? 'text' : 'password'} className="form-control"
+                                                    id="floatingPassword" placeholder="Password" value={this.state.password}
+                                                    onChange={(event) => this.handleOnChangePassword(event)}
+                                                    onKeyDown={(event) => { this.handleKeyDown(event) }}
+                                                />
+                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                <span className='icon-isshow' onClick={() => { this.handleShowHidePassword() }}>
+
+                                                    <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
+                                                </span>
+                                                <label className='label-input' for="floatingPassword">Password</label>
+                                            </div>
+
+
+
+                                            {signin === false ?
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" className="form-control" id="floatingInput1"
+                                                        placeholder="FullName" value={this.state.fullname}
+                                                        onChange={(event) => this.handleOnChangeFullName(event)}
+                                                        onKeyDown={(event) => { this.handleKeyDown(event) }}
+                                                    />
+                                                    <i class="fa fa-user" aria-hidden="false"></i>
+                                                    <label className='label-input' for="floatingInput1">FullName</label>
+                                                </div>
+                                                :
+                                                <div>
+                                                </div>
+                                            }
+
+                                            <div className='group-message'>
+                                                <div className='errLogin' style={{ color: 'red' }}>
+                                                    {this.state.errMessage}
+                                                </div>
+                                                {signin === true ?
+                                                    <div className='forgot-passname'>
+                                                        <span
+                                                            onClick={() => this.handleForgotPassword()}
+                                                        >Forgot Password</span>
+                                                    </div> : <></>}
+                                            </div>
+                                        </div>
+                                        {signin === false ?
+                                            <button className='btn-signup'
+                                                onClick={() => this.handleSignup()}
+                                            >
+                                                sign up
+                                            </button> :
+                                            <button className='btn-signup'
+                                                onClick={() => this.handleSignin()}
+                                            >
+                                                sign in
+                                            </button>
+                                        }
+                                    </>
                                 }
+
                             </div>
                         </div>
                     </div>
