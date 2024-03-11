@@ -11,14 +11,17 @@ import { withRouter } from 'react-router';
 
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+    state = {
             isShow: false,
             isshowModal: false,
             isShowModalChangePassword: false,
         }
-    }
+        componentDidMount(){
+
+        }
+        componentDidUpdate(prevProps,prevState,snapshot){
+            
+        }
 
     returnToHome = () => {
         //  let isLoggedIn = this.props
@@ -82,27 +85,27 @@ class Header extends Component {
                         <div className='get-enery sub-item'>
 
                             <div className='collect'>
-                                <i class="fa fa-bolt" aria-hidden="true"></i>
+                                <i className="fa fa-bolt" aria-hidden="true"></i>
                                 <span> Điện năng tiêu thụ</span>
                             </div>
                         </div>
                         <div className='get-temperature sub-item'>
                             <div className='collect'>
-                                <i class="fa fa-thermometer-half" aria-hidden="true"></i>
+                                <i className="fa fa-thermometer-half" aria-hidden="true"></i>
                                 <span> Nhiệt độ</span>
                             </div>
                         </div>
                         <div className='get-humidity sub-item'>
                             <div className='collect'>
-                                <i class="fa fa-snowflake" aria-hidden="true"></i>
+                                <i className="fa fa-snowflake" aria-hidden="true"></i>
                                 <span> Độ ẩm</span>
                             </div>
 
                         </div>
                         <div className='get-humidity sub-item'>
                             <div className='collect'>
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                <i class='bx bxs-phone-outgoing'></i>
+                                <i className="fa fa-phone" aria-hidden="true"></i>
+                                <i className='bx bxs-phone-outgoing'></i>
                                 <span>Hỗ trợ</span>
                             </div>
 
@@ -142,6 +145,7 @@ class Header extends Component {
                                 isshowModal={isshowModal}
                                 handleCloseModal={this.closeModal}
                                 isShowModalChangePassword={this.state.isShowModalChangePassword}
+                                showMenuApp= {this.showMenuApp}
                             />
                             :
                             <div>

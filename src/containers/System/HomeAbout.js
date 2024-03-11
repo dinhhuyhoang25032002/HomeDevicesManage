@@ -6,8 +6,12 @@ import './HomeAbout.scss'
 
 
 class HomeAbout extends Component {
+    state={
 
+    }
+    componentDidMount(){
 
+    }
     render() {
 
         return (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+// import { push } from "connected-react-router";
 import { LANGUAGES } from '../utils';
 import * as actions from "../store/actions";
 import { FormattedMessage } from 'react-intl';
@@ -10,20 +10,18 @@ import { handleSignin } from '../services/adminService';
 import { handleSignUp } from '../services/adminService'
 import { toast } from 'react-toastify';
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            signin: false,
-            username: '',
-            password: '',
-            fullname: '',
-            isShowPassword: false,
-            errMessage: '',
-            isShowForgotPassword: false,
-        }
+    state = {
+        signin: false,
+        username: '',
+        password: '',
+        fullname: '',
+        isShowPassword: false,
+        errMessage: '',
+        isShowForgotPassword: false,
     }
+    
     async componentDidMount() {
-
+     
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -71,7 +69,7 @@ class Login extends Component {
 
         try {
             let data = await handleSignin(this.state.username, this.state.password);
-            console.log('hoàng check data:', data);
+            
             if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.errMessage
@@ -94,7 +92,7 @@ class Login extends Component {
     }
 
     handleKeyDown = (event) => {
-        console.log('check event: ', event)
+
         if (event.key === 'Enter' || event.keyCode === 13) {
             this.handleSignin()
         }
@@ -137,7 +135,7 @@ class Login extends Component {
     render() {
         let { signin } = this.state;
         let { isLoggedIn, adminInfo } = this.props;
-        console.log("hoang check data: ", isLoggedIn, adminInfo);
+     
         return (
             <div className='extra-infor'>
                 <div className='body'>
@@ -178,16 +176,16 @@ class Login extends Component {
                                             Please enter your email address or mobile number to search for your account
                                         </span>
                                         <div className='group-signup-input'>
-                                            <div class="form-floating mb-3 mt-3">
+                                            <div className="form-floating mb-3 mt-3">
                                                 <input type="email" className="form-control" id="floatingInput"
                                                     placeholder="name@example.com" value={this.state.username}
 
                                                     onChange={(event) => this.handleOnChangeUser(event)}
                                                     onKeyDown={(event) => { this.handleKeyDown(event) }}
                                                 />
-                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                <i className="fa fa-envelope" aria-hidden="true"></i>
 
-                                                <label className='label-input' for="floatingInput">Email address</label>
+                                                <label className='label-input' htmlFor="floatingInput">Email address</label>
                                             </div>
                                         </div>
                                         <button className='btn-signup'
@@ -217,42 +215,42 @@ class Login extends Component {
 
                                         </div>
                                         <div className='group-signup-input'>
-                                            <div class="form-floating mb-3">
+                                            <div className="form-floating mb-3">
                                                 <input type="email" className="form-control" id="floatingInput"
                                                     placeholder="name@example.com" value={this.state.username}
 
                                                     onChange={(event) => this.handleOnChangeUser(event)}
                                                     onKeyDown={(event) => { this.handleKeyDown(event) }}
                                                 />
-                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                <i className="fa fa-envelope" aria-hidden="true"></i>
 
-                                                <label className='label-input' for="floatingInput">Email address</label>
+                                                <label className='label-input' htmlFor="floatingInput">Email address</label>
                                             </div>
-                                            <div class="form-floating  mb-3">
+                                            <div className="form-floating  mb-3">
                                                 <input type={this.state.isShowPassword ? 'text' : 'password'} className="form-control"
                                                     id="floatingPassword" placeholder="Password" value={this.state.password}
                                                     onChange={(event) => this.handleOnChangePassword(event)}
                                                     onKeyDown={(event) => { this.handleKeyDown(event) }}
                                                 />
-                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                <i className="fa fa-lock" aria-hidden="true"></i>
                                                 <span className='icon-isshow' onClick={() => { this.handleShowHidePassword() }}>
 
                                                     <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
                                                 </span>
-                                                <label className='label-input' for="floatingPassword">Password</label>
+                                                <label className='label-input' htmlFor="floatingPassword">Password</label>
                                             </div>
 
 
 
                                             {signin === false ?
-                                                <div class="form-floating mb-3">
+                                                <div className="form-floating mb-3">
                                                     <input type="text" className="form-control" id="floatingInput1"
                                                         placeholder="FullName" value={this.state.fullname}
                                                         onChange={(event) => this.handleOnChangeFullName(event)}
                                                         onKeyDown={(event) => { this.handleKeyDown(event) }}
                                                     />
-                                                    <i class="fa fa-user" aria-hidden="false"></i>
-                                                    <label className='label-input' for="floatingInput1">FullName</label>
+                                                    <i className="fa fa-user" aria-hidden="false"></i>
+                                                    <label className='label-input' htmlFor="floatingInput1">FullName</label>
                                                 </div>
                                                 :
                                                 <div>

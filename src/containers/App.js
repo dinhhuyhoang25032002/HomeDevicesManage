@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
@@ -18,6 +18,7 @@ import System from '../routes/System';
 import CustomScrollbars from '../components/CustomScrollbars';
 import ConfirmModal from '../components/ConfirmModal';
 
+import ScrollToTop from "react-scroll-to-top";
 class App extends Component {
 
     handlePersistorState = () => {
@@ -37,22 +38,29 @@ class App extends Component {
     componentDidMount() {
         this.handlePersistorState();
     }
+    handleButtonTop = () => {
+
+    }
+
 
     render() {
+
         return (
+
             <Fragment>
                 <Router history={history}>
                     <div className="main-container">
                         <ConfirmModal />
-                       
+
                         <div className="content-container">
                             <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
-                            {this.props.isLoggedIn && <Header />}
+                                {this.props.isLoggedIn && <Header />}
                                 <Switch>
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                 </Switch>
+                                <ScrollToTop smooth />
                             </CustomScrollbars>
                         </div>
 

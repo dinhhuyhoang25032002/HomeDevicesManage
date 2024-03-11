@@ -4,16 +4,14 @@ import { NavLink } from 'react-router-dom';
 import { connect } from "react-redux";
 
 class Navigate extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isShowNavigator: false
-        }
+    state = {
+        isShowNavigator: false
     }
+
     componentDidMount() {
 
     }
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
     handleChoiceOption = () => {
@@ -48,7 +46,7 @@ class Navigate extends Component {
                         onClick={() => this.handleChoiceOption()}
                     >
 
-                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                        <i className="fa fa-cogs" aria-hidden="true"></i>
                         <div>Cài đặt</div>
                     </div>
 

@@ -1,0 +1,25 @@
+.goTopHidden {
+    display: none;
+}
+
+.goTop {
+    display: block;
+
+    &._text {
+        position: fixed;
+        background: rgba(252, 248, 241, 0.8);
+        box-shadow: 2px 2px 5px green;
+        width: 30px;
+        height: 30px;
+        border-radius: 25px;
+        bottom: 5%;
+        left: 90%;
+        cursor: pointer;
+        text-align: center;
+        line-height: 30px;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
