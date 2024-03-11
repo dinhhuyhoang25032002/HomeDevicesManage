@@ -4,23 +4,25 @@ let up = async (queryInterface, Sequelize) => {
     await queryInterface.createTable('temp_wind_values', {
         id: {
             allowNull: false,
-            autoIncrement: true,
             primaryKey: true,
+            autoIncrement: true,
+           
             type: Sequelize.INTEGER
         },
 
         date: {
             allowNull: false,
-            type: Sequelize.STRING
-        },
-        windSpeed: {
-            allowNull: false,
-            type: Sequelize.DOUBLE
+           type: Sequelize.STRING
         },
         temperature: {
             allowNull: false,
             type: Sequelize.DOUBLE
         },
+        humidy: {
+            allowNull: false,
+            type: Sequelize.DOUBLE
+        },
+
         createdAt: {
             allowNull: false,
             type: Sequelize.DATE
@@ -34,6 +36,7 @@ let up = async (queryInterface, Sequelize) => {
 let down = async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('temp_wind_values');
 }
-exports = {
-    up, down
+module.exports = {
+    up: up,
+    down: down
 }

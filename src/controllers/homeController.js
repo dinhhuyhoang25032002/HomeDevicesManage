@@ -1,3 +1,4 @@
+import e from 'express';
 import homeService from '../services/homeService'
 
 
@@ -31,7 +32,35 @@ let handleCreateADevice = async (req, res) => {
   try {
     let data = await homeService.handleCreateADevice(req.body);
     return res.status(200).json(data);
-    
+
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      ereMessage: "Error from server!"
+    })
+  }
+}
+
+let handleGetAllDateInfor = async (req, res) => {
+  try {
+    let data = await homeService.handleGetAllDateInfor();
+    return res.status(200).json(data);
+
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      ereMessage: "Error from server!"
+
+    })
+  }
+}
+
+let handleGetAllInforEnergy = async (req, res) => {
+  try {
+    let data = await homeService.handleGetAllInforEnergy(req.query.date);
+    return res.status(200).json(data);
   } catch (e) {
     console.log(e);
     return res.status(200).json({
@@ -43,5 +72,6 @@ let handleCreateADevice = async (req, res) => {
 
 module.exports = {
   getAllDescriptionDepartment, postANewDevice,
-  handleCreateADevice
+  handleCreateADevice, handleGetAllDateInfor,
+  handleGetAllInforEnergy
 }

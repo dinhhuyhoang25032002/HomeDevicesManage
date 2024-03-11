@@ -1,3 +1,4 @@
+import { reject } from 'lodash';
 import db from '../models/index'
 import bcrypt from 'bcrypt';
 
@@ -64,7 +65,7 @@ let checkUserEmail = (userEmail) => {
     })
 }
 let hashUserPassword = (password) => {
-   
+
     return new Promise(async (resolve, reject) => {
         try {
             if (!password) {
@@ -121,6 +122,54 @@ let handleSignUp = (dataUser) => {
     })
 }
 
+let handldeChangePassword = (dataUser) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!dataUser.email || !dataUser.newpassword) {
+                resolve({
+                    errCode: -1,
+                    errMessage: 'Missing required parameter!'
+                })
+            } else {
+                let data = {}
+                data = await db.User.findOne({
+                    where: {
+                        email: dataUser.email
+                    },
+                    raw: false
+                })
+                if (data) {
+                    let check = bcrypt.compareSync(dataUser.newpassword, data.passWord);
+                    if (check) {
+                        resolve({
+                            errCode: -2,
+                            errMessage: "Mật khẩu mới đang trùng với mật khẩu đã được đặt trước đó, Hãy đặt lại mật khẩu khác!"
+                        })
+                    } else {
+                        let hashPasswordfrombcrypt = await hashUserPassword(dataUser.newpassword);
+                        data.passWord = hashPasswordfrombcrypt;
+                        await data.save();
+                        resolve({
+                            errCode: 0,
+                            errMessage: 'Change Password is success!'
+                        })
+                    }
+
+
+                } else {
+                    data = {};
+                    resolve({
+                        errCode: -1,
+                        errMessage: "Your email not exis or not true!"
+                    })
+                }
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
-    handleUserLogin, handleSignUp
+    handleUserLogin, handleSignUp, handldeChangePassword
 }

@@ -22,19 +22,46 @@ let handleLogin = async (req, res) => {
     }
 }
 
-let handleSignUp = async(req, res)=>{
+let handleSignUp = async (req, res) => {
     try {
         let data = await userService.handleSignUp(req.body)
         return res.status(200).json(data)
     } catch (e) {
         console.log(e);
         return res.status(200).json({
-            errCode:-1,
+            errCode: -1,
             errMessage: "Error from server!"
         })
     }
 }
 
+let handldeChangePassword = async (req, res) => {
+    try {
+        let data = await userService.handldeChangePassword(req.body);
+        return res.status(200).json(data);
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server!'
+        })
+    }
+}
+
+let handleGetPassword = async (req, res) => {
+    try {
+        let data = await userService.handleGetPassword(req.body);
+        return res.status(200).json(data);
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server!'
+        })
+    }
+}
+
 module.exports = {
-    handleLogin,handleSignUp
+    handleLogin, handleSignUp, handldeChangePassword,
+    handleGetPassword,
 }

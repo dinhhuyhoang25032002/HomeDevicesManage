@@ -34,6 +34,7 @@ let up = async (queryInterface, Sequelize) => {
 let down = async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('energy_consumptions');
 }
-exports = {
-    down, up
+module.exports = {
+    down: down,
+    up: up
 }

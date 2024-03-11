@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-
+            Energy_Consumption.belongsTo(models.Description_Department, { foreignKey: 'department_id', as: 'departmentData' });
+            Energy_Consumption.belongsTo(models.Temp_Wind_Value, { foreignKey: 'date', as: 'dataDate' });
         }
     };
     Energy_Consumption.init({

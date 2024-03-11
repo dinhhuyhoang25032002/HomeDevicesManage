@@ -51,7 +51,7 @@ let up = async (queryInterface, Sequelize) => {
 let down = async (queryInterface, Sequelize) => {
   await queryInterface.dropTable('Users');
 }
-exports = {
-  up, down
+module.exports = {
+  up: up, down: down
 }
 

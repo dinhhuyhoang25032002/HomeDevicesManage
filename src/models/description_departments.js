@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Description_Department.hasMany(models.Energy_Consumption, { foreignKey: 'department_id', as: 'departmentData' });
 
         }
     };

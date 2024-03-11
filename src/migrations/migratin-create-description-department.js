@@ -30,6 +30,7 @@ let up = async (queryInterface, Sequelize) => {
 let down = async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('description_departments');
 }
-exports = {
-    up, down
+module.exports = {
+    down: down,
+    up: up
 }
