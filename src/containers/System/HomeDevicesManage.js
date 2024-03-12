@@ -20,8 +20,9 @@ class HomeDevicesManage extends Component {
         descriptionMarkdown: '',
         isOpen: false,
         username: '',
-        password: '',
-        errMessage: ''
+        errMessage: '',
+        newpassword: '', 
+        repassword: ''
     }
 
 

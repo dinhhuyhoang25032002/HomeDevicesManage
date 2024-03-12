@@ -19,9 +19,9 @@ class Login extends Component {
         errMessage: '',
         isShowForgotPassword: false,
     }
-    
+
     async componentDidMount() {
-     
+
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -69,7 +69,7 @@ class Login extends Component {
 
         try {
             let data = await handleSignin(this.state.username, this.state.password);
-            
+
             if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.errMessage
@@ -135,7 +135,7 @@ class Login extends Component {
     render() {
         let { signin } = this.state;
         let { isLoggedIn, adminInfo } = this.props;
-     
+
         return (
             <div className='extra-infor'>
                 <div className='body'>
@@ -186,6 +186,15 @@ class Login extends Component {
                                                 <i className="fa fa-envelope" aria-hidden="true"></i>
 
                                                 <label className='label-input' htmlFor="floatingInput">Email address</label>
+                                            </div>
+                                            <div className="form-floating mb-3">
+                                                <input type="text" className="form-control" id="floatingInput1"
+                                                    placeholder="FullName" value={this.state.fullname}
+                                                    onChange={(event) => this.handleOnChangeFullName(event)}
+                                                    onKeyDown={(event) => { this.handleKeyDown(event) }}
+                                                />
+                                                <i className="fa fa-user" aria-hidden="false"></i>
+                                                <label className='label-input' htmlFor="floatingInput1">FullName</label>
                                             </div>
                                         </div>
                                         <button className='btn-signup'

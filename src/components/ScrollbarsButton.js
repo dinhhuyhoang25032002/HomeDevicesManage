@@ -1,36 +1,38 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState } from 'react';
 
+import './ScrollbarsButton.scss';
 
-const ScrollbarsButton = (props) => {
-    const [scrollPosition, setSrollPosition] = useState(0);
-    let[showGoTop, setshowGoTop] = useState("goTopHidden")
-    const handleVisibleButton = () => {
-        const position = window.pageYOffset;
-        setSrollPosition(position);
+const ScrollbarsButton = () => {
 
-        if (scrollPosition > 50) {
-            return setshowGoTop("goTop");
-        } else if (scrollPosition < 50) {
-            return setshowGoTop("goTopHidden");
+    const [visible, setVisible] = useState(false)
+
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > 30) {
+            setVisible(true)
+        }
+        else if (scrolled <= 30) {
+            setVisible(false)
         }
     };
-    useEffect(() => {
-        window.addEventListener("scroll", handleVisibleButton);
-    });
-    const refScrollUp = useRef();
-    const handleScrollUp = () => {
-        refScrollUp.current.scrollIntoView({ behavior: "smooth" });
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'auto'
+            /* you can also use 'auto' behaviour 
+                in place of 'smooth' */
+        });
     };
+
+    window.addEventListener('scroll', toggleVisible);
+
     return (
-        <>
-            <div className={props.showGoTop} onClick={props.scrollUp}>
-                <button className="goTop">
-                    <i className="goTop _text fas fa-chevron-up" />
-                </button>
-            </div>
-        </>
+        <button onClick={scrollToTop}>
+            {/* // style={{ display: visible ? 'block' : 'none' }} > */}
+dsadasdjhklhjkljhl
+        </button>
     );
-};
-export default ScrollbarsButton;
+}
 
-
+export default ScrollbarsButton; 

@@ -5,15 +5,14 @@ import './UserManage.scss';
 
 import HomeAbout from './HomeAbout'
 import RenderDevices from './RenderDevices'
-import ScrollToTop from "react-scroll-to-top";
+
 
 function UserManage() {
 
 
-
     return (
         <div className=' home-page-container'>
-            <ScrollToTop smooth ScrollToTop/>
+          
             <div className='body-system' id='myBtn'>
 
                 <div className='content-system'>
@@ -37,11 +36,11 @@ function UserManage() {
                 </div>
 
             </div>
-
+           
         </div>
 
     );
 }
 
 
-export default (UserManage);
+export default UserManage;
