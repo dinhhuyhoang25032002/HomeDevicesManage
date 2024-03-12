@@ -106,7 +106,7 @@ let handleGetAllInforEnergy = (date) => {
                         exclude: ['updatedAt', 'createdAt']
                     },
                     include: [
-                        { model: db.Description_Department, as: 'departmentData', attributes: ['name_location_department','image'] },
+                        { model: db.Description_Department, as: 'departmentData', attributes: ['name_location_department', 'image'] },
 
 
                     ],
@@ -122,7 +122,7 @@ let handleGetAllInforEnergy = (date) => {
                     attributes: {
                         exclude: ['updatedAt', 'createdAt']
                     },
-                     raw: false,
+                    raw: false,
                     nest: true
                 })
 
@@ -138,7 +138,39 @@ let handleGetAllInforEnergy = (date) => {
     })
 }
 
+let handleGetAllInforDePartment = (id) => {
+    console.log("hoang check data: ", id);
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!id) {
+                resolve({
+                    errCode: -1,
+                    errMessage: 'Missing required parameter!'
+                })
+            } else {
+                let data = await db.Energy_Consumption.findAll({
+                    where: {
+                        department_id: id,
+                    }, raw: true, nest: true,
+                    attributes: {
+                        exclude: ['updatedAt', 'createdAt']
+                    },
+
+                })
+                resolve({
+                    errCode:0,
+                    errMessage:"Data from server!",
+                    data
+                })
+            }
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
+
 module.exports = {
     getAllDescriptionDepartment, handleCreateADevice,
     handleGetAllDateInfor, handleGetAllInforEnergy
+    , handleGetAllInforDePartment
 }

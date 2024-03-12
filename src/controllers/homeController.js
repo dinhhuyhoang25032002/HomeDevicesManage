@@ -70,8 +70,21 @@ let handleGetAllInforEnergy = async (req, res) => {
   }
 }
 
+let handleGetAllInforDePartment = async (req, res) => {
+  try {
+    let data = await homeService.handleGetAllInforDePartment(req.query.id);
+    return res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    return res.status(200).json({
+      errCode: -1,
+      ereMessage: 'Error from server!'
+    })
+  }
+}
+
 module.exports = {
   getAllDescriptionDepartment, postANewDevice,
   handleCreateADevice, handleGetAllDateInfor,
-  handleGetAllInforEnergy
+  handleGetAllInforEnergy, handleGetAllInforDePartment
 }

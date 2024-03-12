@@ -1,7 +1,7 @@
-import { reject } from 'lodash';
+import { checkActivityEmail } from './emailService'
 import db from '../models/index'
 import bcrypt from 'bcrypt';
-
+import generator from 'generate-password';
 let handleUserLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -170,6 +170,66 @@ let handldeChangePassword = (dataUser) => {
     })
 }
 
+let handleGetPassword = (dataUser) => {
+    console.log("hoang check data: ", dataUser);
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!dataUser.fullName || !dataUser.email) {
+                resolve({
+                    errCode: -1,
+                    errMessage: 'Missing required parameter!'
+                })
+            } else {
+                let data = {};
+                data = await db.User.findOne({
+                    where: {
+                        email: dataUser.email,
+
+                    },
+                    raw: false,
+                    nest: true
+                })
+
+                if (data) {
+
+                    let newpassword = generator.generate({
+                        length: 10,
+                        numbers: true
+                    });
+                    console.log("hoang check data: ", newpassword);
+
+                    let dataSend = {};
+                    dataSend.fullName = data.firstName +' '+ data.lastName;
+                    dataSend.email = data.email;
+                    dataSend.passWord = newpassword;
+                    console.log("hoang check data: ", dataSend.fullName);
+
+
+                    let password = await hashUserPassword(newpassword);
+                    data.passWord = password;
+
+                    await data.save();
+                    await checkActivityEmail(dataSend);
+                    resolve({
+                        errCode: 0,
+                        errMessage: 'Password sended to user!'
+                    })
+
+                } else {
+                    data = {}
+                    resolve({
+                        errCode: -1,
+                        errMessage: "Your email isn't exist!"
+                    })
+                }
+            }
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
+
 module.exports = {
-    handleUserLogin, handleSignUp, handldeChangePassword
+    handleUserLogin, handleSignUp, handldeChangePassword,
+    handleGetPassword
 }
