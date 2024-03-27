@@ -45,10 +45,13 @@ let handleGetAllDateInfor = () => {
 }
 
 let handleGetAllInforEnergy = (date) => {
-return axios.get(`/api/get-energy-comsumer-by-date?date=${date}`);
+    return axios.get(`/api/get-energy-comsumer-by-date?date=${date}`);
+}
+let handleGetAllInforDePartment = (id) => {
+    return axios.get(`/api/get-all-infor-department-by-id?id=${id}`);
 }
 export {
     handleSignin, handleSignUp, handleCreateADevice,
     handleChangePassword, getAllDeviceInfor, handleGetAllDateInfor,
-    handleGetAllInforEnergy
+    handleGetAllInforEnergy, handleGetAllInforDePartment
 };

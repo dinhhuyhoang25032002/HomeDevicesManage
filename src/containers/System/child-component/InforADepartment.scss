@@ -1,0 +1,37 @@
+.extra-doctor-infor-container {
+
+
+    .body {
+        display: flex;
+        padding: 20px 90px;
+        gap: 40px;
+        justify-content: center;
+        align-items: center;
+
+        .content-left {
+            width: 25%;
+            height: 200px;
+            display: flex;
+            gap: 20px;
+            flex-direction: column;
+
+            .options-date {}
+
+            .image {
+                border: 1px solid red;
+                height: 55%;
+
+            }
+
+            .infor-values-of-date {
+                height: 40%;
+                border: 1px solid green;
+            }
+        }
+
+        .content-right {
+            width: 65%;
+            border: 1px solid orange;
+        }
+    }
+}

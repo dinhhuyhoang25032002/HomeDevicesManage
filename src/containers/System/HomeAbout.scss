@@ -4,7 +4,8 @@
     flex-direction: column;
     background: white;
     border-top: 1px solid #dddddd;
-
+    position: sticky;
+    bottom: 0;
 
     .section-cright {
         width: 100vw;

@@ -46,6 +46,7 @@ class RenderDevices extends Component {
     buildResData = async (date) => {
         try {
             let response = await handleGetAllInforEnergy(date);
+            console.log("check data: ", response);
             let listName = [], allInfor = {};
             if (response && response.errCode === 0) {
                 {
@@ -60,7 +61,7 @@ class RenderDevices extends Component {
             allInfor.dataDate = { ...response.data.dataDate };
 
             this.setState({
-                nameRoom: allInfor
+                ...this.state.nameRoom = allInfor
             })
 
         } catch (error) {
@@ -90,19 +91,17 @@ class RenderDevices extends Component {
         }
     }
     render() {
-
         let { language } = this.props;
         let { optionDate, nameRoom, department } = this.state;
 
         return (
             <div className='infor-devices-container'>
-                <div >
+                {/* <div >
                     <select className='option-date form-select'
                         onChange={(event) => { this.handleOnchangeSelect(event) }}
                     >
                         {optionDate && optionDate.length > 0 &&
                             optionDate.map((item, index) => {
-
                                 return (
                                     <option className='option-date'
                                         key={index}
@@ -113,9 +112,8 @@ class RenderDevices extends Component {
                             })}
 
                     </select>
-                </div>
+                </div> */}
                 <div className='show-devices'>
-
                     {
                         nameRoom && nameRoom.dataEnergy && nameRoom.dataEnergy.length > 0 &&
                         nameRoom.dataEnergy.map((item, index) => {
@@ -126,7 +124,6 @@ class RenderDevices extends Component {
                                         key={index}
                                     >
                                         <div className='name-devices'
-
                                         >
                                             {item.departmentData.name_location_department}
                                         </div>
