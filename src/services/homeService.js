@@ -1,6 +1,5 @@
-
 import db from '../models/index'
-
+import _ from 'lodash'
 let getAllDescriptionDepartment = () => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -90,7 +89,7 @@ let handleGetAllDateInfor = () => {
 }
 
 let handleGetAllInforEnergy = (date) => {
-    console.log("hoang check data: ", date)
+  //  console.log("hoang check data: ", date)
     return new Promise(async (resolve, reject) => {
         try {
             if (!date) {
@@ -122,6 +121,7 @@ let handleGetAllInforEnergy = (date) => {
                     attributes: {
                         exclude: ['updatedAt', 'createdAt']
                     },
+
                     raw: false,
                     nest: true
                 })
@@ -139,7 +139,7 @@ let handleGetAllInforEnergy = (date) => {
 }
 
 let handleGetAllInforDePartment = (id) => {
-    console.log("hoang check data: ", id);
+  // console.log("hoang check data: ", id);
     return new Promise(async (resolve, reject) => {
         try {
             if (!id) {
@@ -151,15 +151,18 @@ let handleGetAllInforDePartment = (id) => {
                 let data = await db.Energy_Consumption.findAll({
                     where: {
                         department_id: id,
-                    }, raw: true, nest: true,
+                    },
+                    include: [
+                        { model: db.Description_Department, as: 'departmentData', attributes: ['name_location_department', 'image'] },
+                    ],
+                    raw: false, nest: true,
                     attributes: {
                         exclude: ['updatedAt', 'createdAt']
                     },
-
                 })
                 resolve({
-                    errCode:0,
-                    errMessage:"Data from server!",
+                    errCode: 0,
+                    errMessage: "Data from server!",
                     data
                 })
             }
@@ -172,5 +175,5 @@ let handleGetAllInforDePartment = (id) => {
 module.exports = {
     getAllDescriptionDepartment, handleCreateADevice,
     handleGetAllDateInfor, handleGetAllInforEnergy
-    , handleGetAllInforDePartment
+, handleGetAllInforDePartment
 }

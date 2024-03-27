@@ -14,7 +14,6 @@ let initWebRoutes = (app) => {
 
     //homeController
     router.get('/api/get-all-description-department', homeController.getAllDescriptionDepartment);
-    router.post('/api/create-a-new-device', homeController.postANewDevice);
     router.post('/api/create-new-device', homeController.handleCreateADevice)
     router.get('/api/get-all-temp-humidy-date',homeController.handleGetAllDateInfor);
     router.get('/api/get-energy-comsumer-by-date',homeController.handleGetAllInforEnergy);
