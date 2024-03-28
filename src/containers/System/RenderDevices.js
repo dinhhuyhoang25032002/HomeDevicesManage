@@ -42,7 +42,6 @@ class RenderDevices extends Component {
         await this.buildResData(date[0]);
     }
 
-
     buildResData = async (date) => {
         try {
             let response = await handleGetAllInforEnergy(date);
@@ -148,7 +147,6 @@ class RenderDevices extends Component {
                                         </div>
                                     </div>
                                 </>
-
                             )
                         })
                     }

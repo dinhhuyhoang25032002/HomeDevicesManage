@@ -4,33 +4,42 @@
     .body {
         display: flex;
         padding: 20px 90px;
-        gap: 40px;
+        gap: 80px;
         justify-content: center;
-        align-items: center;
+      //  align-items: center;
 
         .content-left {
             width: 25%;
-            height: 200px;
+            height: fit-content;
             display: flex;
             gap: 20px;
             flex-direction: column;
 
-            .options-date {}
+            .options-date {
+                width: fit-content;
+                margin-bottom: 20px;
+            }
 
             .image {
-                border: 1px solid red;
-                height: 55%;
+              //  width: 280px;
+                height: 200px;
+                border-radius: 5px;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                cursor: pointer;
 
             }
 
             .infor-values-of-date {
-                height: 40%;
+                height: 80px;
                 border: 1px solid green;
+
             }
         }
 
         .content-right {
-            width: 65%;
+            width: 60%;
             border: 1px solid orange;
         }
     }

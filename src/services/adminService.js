@@ -50,8 +50,13 @@ let handleGetAllInforEnergy = (date) => {
 let handleGetAllInforDePartment = (id) => {
     return axios.get(`/api/get-all-infor-department-by-id?id=${id}`);
 }
+let handleGetAllValuesByIdAndDate = (id, date) => {
+    return axios.get(`/api/get-all-value-of-department-by-id?id=${id}&date=${date}`);
+}
+
 export {
     handleSignin, handleSignUp, handleCreateADevice,
     handleChangePassword, getAllDeviceInfor, handleGetAllDateInfor,
-    handleGetAllInforEnergy, handleGetAllInforDePartment
+    handleGetAllInforEnergy, handleGetAllInforDePartment,
+    handleGetAllValuesByIdAndDate
 };
