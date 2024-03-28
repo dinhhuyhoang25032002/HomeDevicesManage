@@ -1,6 +1,4 @@
-import e from 'express';
 import homeService from '../services/homeService'
-
 
 let getAllDescriptionDepartment = async (req, res) => {
   try {
@@ -69,9 +67,21 @@ let handleGetAllInforDePartment = async (req, res) => {
     })
   }
 }
-
+let handleGetAllValuesByIdAndDate = async (req, res) => {
+  try {
+    let data = await homeService.handleGetAllValuesByIdAndDate(req.query.id, req.query.date);
+    return res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    return res.status(200).json({
+      errCode: -1,
+      ereMessage: 'Error from server!'
+    })
+  }
+}
 module.exports = {
   getAllDescriptionDepartment,
   handleCreateADevice, handleGetAllDateInfor,
-  handleGetAllInforEnergy, handleGetAllInforDePartment
+  handleGetAllInforEnergy, handleGetAllInforDePartment,
+  handleGetAllValuesByIdAndDate
 }

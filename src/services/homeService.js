@@ -89,7 +89,7 @@ let handleGetAllDateInfor = () => {
 }
 
 let handleGetAllInforEnergy = (date) => {
-  //  console.log("hoang check data: ", date)
+    //  console.log("hoang check data: ", date)
     return new Promise(async (resolve, reject) => {
         try {
             if (!date) {
@@ -107,15 +107,10 @@ let handleGetAllInforEnergy = (date) => {
                     include: [
                         { model: db.Description_Department, as: 'departmentData', attributes: ['name_location_department', 'image'] },
 
-
                     ],
                     raw: false,
                     nest: true
                 })
-
-                // console.log("check data: ",data.departmentData);
-                //
-
                 data.dataDate = await db.Temp_Wind_Value.findOne({
                     where: { date: +date },
                     attributes: {
@@ -139,7 +134,7 @@ let handleGetAllInforEnergy = (date) => {
 }
 
 let handleGetAllInforDePartment = (id) => {
-  // console.log("hoang check data: ", id);
+
     return new Promise(async (resolve, reject) => {
         try {
             if (!id) {
@@ -148,14 +143,22 @@ let handleGetAllInforDePartment = (id) => {
                     errMessage: 'Missing required parameter!'
                 })
             } else {
-                let data = await db.Energy_Consumption.findAll({
+                let data = {};
+                data.dataEnergy = await db.Energy_Consumption.findAll({
                     where: {
                         department_id: id,
                     },
-                    include: [
-                        { model: db.Description_Department, as: 'departmentData', attributes: ['name_location_department', 'image'] },
-                    ],
-                    raw: false, nest: true,
+                    raw: true, nest: true,
+                    attributes: {
+                        exclude: ['updatedAt', 'createdAt']
+                    },
+                })
+                data.dataInfor = await db.Description_Department.findOne({
+                    where: {
+                        id: id
+                    },
+                    raw: true,
+                    nest: true,
                     attributes: {
                         exclude: ['updatedAt', 'createdAt']
                     },
@@ -171,9 +174,51 @@ let handleGetAllInforDePartment = (id) => {
         }
     })
 }
+let handleGetAllValuesByIdAndDate = (id, date) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!id || !date) {
+                resolve({
+                    errCode: -1,
+                    errMessage: 'Missing required parameter!'
+                })
+            } else {
+                let data = {}
+                data.dataEnergy = await db.Energy_Consumption.findOne({
+                    where: {
+                        department_id: id,
+                        date: date
+                    },
+                    attributes: {
+                        exclude: ['updatedAt', 'createdAt']
+                    },
 
+                    nest: true,
+                    raw: true,
+                })
+                data.dataTempHumidy = await db.Temp_Wind_Value.findOne({
+                    where: {
+                        date: date,
+                    },
+                    attributes: {
+                        exclude: ['updatedAt', 'createdAt']
+                    },
+                    nest: true,
+                    raw: true,
+                })
+                resolve({
+                    errCode: 0,
+                    errMessage: "Data from server!",
+                    data
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 module.exports = {
     getAllDescriptionDepartment, handleCreateADevice,
     handleGetAllDateInfor, handleGetAllInforEnergy
-, handleGetAllInforDePartment
+    , handleGetAllInforDePartment, handleGetAllValuesByIdAndDate
 }
