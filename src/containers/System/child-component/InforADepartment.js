@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { LANGUAGES } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
 import Layout from "./Layout";
-
 import { handleGetAllInforDePartment, handleGetAllDateInfor, handleGetAllValuesByIdAndDate } from "../../../services/adminService"
 import _ from 'lodash'
 import moment from 'moment';
 import localization from 'moment/locale/vi';
 import './InforADepartment.scss'
+import HomeAbout from '../HomeAbout'
 class InforADepartment extends Component {
     constructor(props) {
         super(props);
@@ -18,13 +18,15 @@ class InforADepartment extends Component {
             Energy: [],
             Temp: [],
             Humidy: [],
+            Energyid: '',
+            Tempid: '',
+            Humidyid: '',
         }
     }
     async componentDidMount() {
         let id = this.props.match.params.id;
         await this.buildDataState();
-        let response = await handleGetAllValuesByIdAndDate(id, this.state.optionDate[0])
-        console.log("CHECK DATA: ", response);
+        await this.builDataTable(id, this.state.optionDate[0]);
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -38,7 +40,7 @@ class InforADepartment extends Component {
         if (id && !_.isEmpty(id)) {
             let response = await handleGetAllInforDePartment(id);
             let resTempHumidy = await handleGetAllDateInfor();
-            //  console.log("check res:", resTempHumidy);
+            console.log("check responde 121:", response);
             let arrDate = [];
             let arrEnergy = [], arrTemp = [], arrHumidy = [];
             if (resTempHumidy && resTempHumidy.errCode == 0 && resTempHumidy.data && resTempHumidy.data.length > 0) {
@@ -80,24 +82,40 @@ class InforADepartment extends Component {
                 })
             }
         }
-
     }
 
     capitalizeFirstLetter = (string) => {
-        // console.log('check string:', string);
         return string.charAt(0).toUpperCase() + string.slice(1, 4) + string.charAt(4).toUpperCase() + string.slice(5);
+    }
+
+    builDataTable = async (id, date) => {
+        let response = await handleGetAllValuesByIdAndDate(id, date)
+        if (response && response.errCode === 0 && !_.isEmpty(response.data)) {
+            this.setState({
+                ...this.state.Energyid = response.data.dataEnergy.energy_consumption,
+                ...this.state.Humidyid = response.data.dataTempHumidy.humidy,
+                ...this.state.Tempid = response.data.dataTempHumidy.temperature
+            })
+        }
+    }
+    handleOnchangeSelect = async (event) => {
+        console.log("check data select: ", event.target.value);
+        let date = event.target.value;
+        let id = this.props.match.params.id;
+        await this.builDataTable(id, date);
     }
     render() {
         let { language } = this.props;
-        let { optionDate, imageDepartment, Humidy, Temp, Energy } = this.state;
+        let { optionDate, imageDepartment, Humidy, Temp, Energy, Humidyid, Tempid, Energyid } = this.state;
         let imageBase64 = new Buffer.from(imageDepartment, 'base64').toString('binary');
-        //console.log("hoang check state: ", this.state);
         return (
             <div className='extra-doctor-infor-container'>
                 <div className='body'>
                     <div className='content-left'>
                         <div className='options-date'>
-                            <select className='option-date form-select'>
+                            <select className='option-date form-select'
+                                onChange={(event) => { this.handleOnchangeSelect(event) }}
+                            >
                                 {optionDate && optionDate.length > 0 &&
                                     optionDate.map((item, index) => {
                                         return (
@@ -116,7 +134,22 @@ class InforADepartment extends Component {
 
                         </div>
                         <div className='infor-values-of-date'>
-
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nhiệt độ</th>
+                                        <th scope="col">Độ ẩm</th>
+                                        <th scope="col">Điện năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{Tempid} °C</td>
+                                        <td>{Humidyid} %</td>
+                                        <td>{Math.round(Energyid * 1000) / 1000} kWh</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div className='content-right'>
@@ -129,6 +162,9 @@ class InforADepartment extends Component {
                             />
                         </div>
                     </div>
+                </div>
+                <div className='footer-system'>
+                    <HomeAbout />
                 </div>
             </div>
         )

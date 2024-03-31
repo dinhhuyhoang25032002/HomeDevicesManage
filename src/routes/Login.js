@@ -160,8 +160,6 @@ class Login extends Component {
                                 </button>
                             }
                         </div>
-
-
                     </div>
                     <div className='right-container'>
                         <div className='container'>

@@ -139,7 +139,7 @@ class RenderDevices extends Component {
 
                                             </div>
                                             <div className='energy'>
-                                                <span>Điện năng tiêu thụ: {item.energy_consumption} kWh</span>
+                                                <span>Điện năng tiêu thụ: {Math.round(item.energy_consumption * 1000) / 1000} kWh</span>
                                             </div>
                                             <div className='speed'>
                                                 <span>Độ ẩm không khí:{nameRoom.dataDate.humidy}%</span>

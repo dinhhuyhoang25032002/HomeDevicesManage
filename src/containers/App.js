@@ -1,6 +1,6 @@
 import React, { Component, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect,Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
@@ -10,7 +10,7 @@ import Home from '../routes/Home';
 import Login from '../routes/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
-import HomeAbout from './System/HomeAbout'
+
 import CustomScrollbars from '../components/CustomScrollbars';
 import ConfirmModal from '../components/ConfirmModal';
 
@@ -50,11 +50,9 @@ class App extends Component {
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                   
+   
                                 </Switch>
-                                <div className='footer-system'>
-                                        <HomeAbout />
-                                    </div>
+                              
                             </CustomScrollbars>
                         </div>
                         <ToastContainer

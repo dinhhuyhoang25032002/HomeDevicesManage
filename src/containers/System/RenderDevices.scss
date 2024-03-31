@@ -5,76 +5,66 @@
     background: #eff2b4;
     padding: 15px 15px;
 
-    .option-date {
-        cursor: pointer;
-        width: fit-content;
-    }
-
     .show-devices {
         display: flex;
         width: 100%;
         height: fit-content;
-        padding: 20px 130px;
+        padding: 20px 200px;
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
-        gap: 50px;
+        gap: 60px;
 
-       
-            .body-render-devices {
-                display: flex;
-                width: 357px;
-                height: 250px;
-                background: white;
-                flex-wrap: wrap;
-                border-radius: 7px;
-                // margin-right: 100px;
+        .body-render-devices {
+            display: flex;
+            width: 357px;
+            height: 250px;
+            background: white;
+            flex-wrap: wrap;
+            border-radius: 7px;
+            margin-right: 80px;
 
-                .name-devices {
-                    width: 100%;
-                    text-align: center;
-                    text-transform: uppercase;
-                    padding: 5px;
-                    height: fit-content;
-                    background: rgb(100, 176, 42);
-                    color: white;
-                    border-top-right-radius: 7px;
-                    border-top-left-radius: 7px;
-                }
-
-                .render-image {
-                    width: 280px;
-                    height: 150px;
-                    border-radius: 5px;
-                    margin-left: -106px;
-                    //  background: url(../../assets/images/devices/livingroom.png);
-                    background-size: cover;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    cursor: pointer;
-                }
-
-                .render-text {
-                    width: 123px;
-                    height: 150px;
-                    border: 1px solid red;
-                    margin-left: 20px;
-                    display: flex;
-                    flex-direction: column;
-                    border-radius: 5px;
-                    padding: 5px 2px;
-
-
-                    .speed {}
-
-                    .energy {}
-
-                    .temt {}
-                }
+            .name-devices {
+                width: 100%;
+                text-align: center;
+                text-transform: uppercase;
+                padding: 5px;
+                height: fit-content;
+                background: rgb(100, 176, 42);
+                color: white;
+                border-top-right-radius: 7px;
+                border-top-left-radius: 7px;
             }
-        
+
+            .render-image {
+                width: 280px;
+                height: 150px;
+                border-radius: 5px;
+                margin-left: -106px;
+                //  background: url(../../assets/images/devices/livingroom.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                cursor: pointer;
+            }
+
+            .render-text {
+                width: 123px;
+                height: 150px;
+                border: 1px solid red;
+                margin-left: 20px;
+                display: flex;
+                flex-direction: column;
+                border-radius: 5px;
+                padding: 5px 2px;
 
 
+                .speed {}
 
+                .energy {}
+
+                .temt {}
+            }
+        }
     }
 }

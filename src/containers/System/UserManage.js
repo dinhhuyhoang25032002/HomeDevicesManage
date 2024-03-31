@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-
+import HomeAbout from './HomeAbout'
 
 import RenderDevices from './RenderDevices'
 
@@ -28,6 +28,9 @@ function UserManage() {
                     < RenderDevices />
 
                 </div>
+                <div className='footer-system'>
+                                        <HomeAbout />
+                                    </div>
             </div>
            
         </div>

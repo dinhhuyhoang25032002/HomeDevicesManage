@@ -25,40 +25,32 @@ class Navigate extends Component {
         return (
             <div className="topnav" >
                 <div className='container'>
-                    <div className='sub-item'>
+                    <div className='sub-item-na'>
                         <i className="fas fa-plus-circle"
                         ></i>
                         <NavLink to="/about-homecare">Giới Thiệu</NavLink>
                     </div>
-                    <div className='sub-item'>
+                    <div className='sub-item-na'>
                         <i className="fas fa-phone"></i>
                         <NavLink to="/contact-to-admin">Liên Hệ</NavLink>
                     </div>
-                    <div className='sub-item'>
+                    <div className='sub-item-na'>
                         <i className="far fa-newspaper"></i>
                         <NavLink to="/news-about-homecare">Tin Tức</NavLink>
                     </div>
-                    {/* <div className='sub-item'>
-                        <i className="fas fa-home"></i>
-                        <a target='_blank' rel="noreferrer" href="https://www.facebook.com/profile.php?id=61555318416572&open_field=website&sk=about_contact_and_basic_info" exact>Trang Thông Tin</a>
-                    </div> */}
-                    <div className='sub-item'
+
+                    <div className='sub-item-na'
                         onClick={() => this.handleChoiceOption()}
                     >
-
                         <i className="fa fa-cogs" aria-hidden="true"></i>
-                        <div>Cài đặt</div>
+                        <div className='setting-all'>
+                            <span>Cài đặt <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                        </div>
                     </div>
 
                     {
                         this.state.isShowNavigator === true ?
                             <div className='setting'>
-                                <div className='setting-device'
-                                    onClick={isShowModalChangePassword}
-                                >
-                                    <i className="fas fa-user-cog"></i>
-                                    <span>My Account</span>
-                                </div>
                                 <div className='setting-device'
                                     onClick={isshowModal}
                                 >
@@ -67,6 +59,13 @@ class Navigate extends Component {
                                     </div>
                                     <span> My Home  </span>
                                 </div>
+                                <div className='setting-device'
+                                    onClick={isShowModalChangePassword}
+                                >
+                                    <i className="fas fa-user-cog"></i>
+                                    <span>My Account</span>
+                                </div>
+
                             </div> : <></>
                     }
                 </div>
@@ -84,7 +83,7 @@ class Navigate extends Component {
                     </details>
                 </div>
 
-            </div>
+            </div >
 
 
         )

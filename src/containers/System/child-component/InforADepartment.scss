@@ -1,12 +1,13 @@
 .extra-doctor-infor-container {
-
+    
 
     .body {
         display: flex;
         padding: 20px 90px;
         gap: 80px;
         justify-content: center;
-      //  align-items: center;
+        overflow-y: hidden;
+        //  align-items: center;
 
         .content-left {
             width: 25%;
@@ -21,7 +22,7 @@
             }
 
             .image {
-              //  width: 280px;
+                //  width: 280px;
                 height: 200px;
                 border-radius: 5px;
                 background-size: cover;
