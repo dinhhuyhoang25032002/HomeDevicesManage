@@ -16,7 +16,7 @@ let checkActivityEmail = async (dataSend) => {
     await transporter.sendMail({
         from: '"Homecare" từ quản trị viên <Homecare@gmail.com>', // sender address
         to: dataSend.email, // list of receivers
-        subject: "Xác nhận thông tin khám bệnh", // Subject line
+        subject: "Thông tin tài khoản yêu cầu cấp lại mật khẩu", // Subject line
         // plain text body
         html: contentHTML(dataSend),  // html body
     });
@@ -34,7 +34,6 @@ let contentHTML = (dataSend) => {
         <p>Thời điểm bạn nhận được email này mật khẩu của bạn đã được đặt lại trên hệ thống. Vui lòng cập nhật mật khẩu khác để tránh các vấn đề rủi ro về bảo mật.</p>
         <br>
         <div>Xin chân thành cảm ơn bạn!<div>`
-
     return result;
 }
 module.exports = {
